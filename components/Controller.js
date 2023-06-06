@@ -28,24 +28,24 @@ const sendOTP = async function (req, res) {
         const { email } = req.body;
         const user = await userService.getUserByEmail(email);
         if (!user) {
-            return res.status(404).send({message:'Không tìm thấy email'});
+            return res.status(404).json({message:'Không tìm thấy email'});
         }
         const otp = await userService.generateOTP(email);
         await userService.sendOTPEmail(email, otp);
-        res.status(200).send({message:'OTP đã được gửi vui lòng kiểm tra email'});
+        res.status(200).json({message:'OTP đã được gửi vui lòng kiểm tra email'});
     } catch (err) {
         console.log(err);
-        res.status(500).send({message:'Sever đang lỗi vui lòng thử lại sau'});
+        res.status(500).json({message:'Sever đang lỗi vui lòng thử lại sau'});
     }
 };
 const sendFeedback = async function (req, res) {
     try {
         const { email, feedback } = req.body;
         await userService.sendFeedBackEmail(email, feedback);
-        res.status(200).send({message:'Yêu cầu của bạn đã được gửi, vui lòng đợi email chúng tôi sẽ trả lời bạn sớm nhất'});
+        res.status(200).json({message:'Yêu cầu của bạn đã được gửi, vui lòng đợi email chúng tôi sẽ trả lời bạn sớm nhất'});
     } catch (err) {
         console.log(err);
-        res.status(500).send({message:'Sever đang lỗi vui lòng thử lại sau'});
+        res.status(500).json({message:'Sever đang lỗi vui lòng thử lại sau'});
     }
 };
 const resetPassword = async function (req, res) {
@@ -53,18 +53,19 @@ const resetPassword = async function (req, res) {
         const { email, otp, newPassword } = req.body;
         const user = await userService.getUserByEmail(email);
         if (!user) {
-            return res.status(404).send('User not found');
+            return res.status(404).json('User not found');
         }
         const isOTPValid = await userService.verifyOTP(email, otp);
         if (!isOTPValid) {
-            return res.status(400).send('Invalid OTP');
+            return res.status(400).json('Invalid OTP');
         }
         const hashedPassword = await bcrypt.hash(newPassword, 10);
         await userService.updatePassword(email, hashedPassword);
-        res.status(200).send('Password updated successfully');
+        res.status(200).json('Password updated successfully');
     } catch (err) {
         console.log(err);
-        res.status(500).send('Internal Server Error');
+        res.status(500).json('Internal Server Error');
     };
+    
 }
 module.exports = { login, register, changePassword, sendOTP, resetPassword, sendFeedback };

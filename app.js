@@ -25,7 +25,7 @@ app.use('/users', usersRouter);
 
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/PTCN2?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false', {
+mongoose.connect('mongodb+srv://Demon:oH045368eWUF2Ny1@dbaas-db-10051061-e36f6f03.mongo.ondigitalocean.com/PTCN2?tls=true&authSource=admin&replicaSet=dbaas-db-10051061', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
