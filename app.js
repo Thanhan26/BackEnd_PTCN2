@@ -6,7 +6,7 @@ var logger = require('morgan');
 const mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var coursRouter = require('./routes/course');
 
 var app = express();
 
@@ -21,11 +21,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/course', coursRouter);
 
 
 
-mongoose.connect('mongodb+srv://Demon:oH045368eWUF2Ny1@dbaas-db-10051061-e36f6f03.mongo.ondigitalocean.com/PTCN2?tls=true&authSource=admin&replicaSet=dbaas-db-10051061', {
+mongoose.connect('mongodb+srv://devnguyenthanhan26:123anan@cluster0.mmt4ppq.mongodb.net/', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })

@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const userController = require('../components/Controller');
+const userController = require('../components/User/Controller');
 const {checkRegister} = require('../Vadilate/Vadilate');
-const service = require('../components/Service');
+const service = require('../components/User/Service');
 
 
 //http://localhost:3000/API/user/login
